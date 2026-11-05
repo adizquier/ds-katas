@@ -35,6 +35,23 @@ print(f"Alumnos que no aprueban ninguna => {no_aprueban_ninguna}: {np.flatnonzer
 
 
 # Sobre 10
+escala = [10, 20, 100]
+sobre_10 = (notas/escala) *10
 
+nota_media_sobre10 = sobre_10.mean(axis=1)
+print(f"Nota media de cada alumno sobre 10: {nota_media_sobre10.round(2)}")
 
 # Ranking
+notas_maximas = notas.max(axis=0)
+notas_minimas = notas.min(axis=0)
+
+notas_normalizadas = (notas - notas_minimas) / (notas_maximas - notas_minimas)
+
+media_normalizada_por_alumno = notas_normalizadas.mean(axis=1)
+print(f"Media de notas normalizada por alumno: {media_normalizada_por_alumno.round(2)}")
+
+mejor_alumno = media_normalizada_por_alumno.argmax()
+peor_alumno = media_normalizada_por_alumno.argmin()
+
+print(f"Mejor alumno: {mejor_alumno}")
+print(f"Peor alumno: {peor_alumno}")
