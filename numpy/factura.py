@@ -39,3 +39,20 @@ dias_por_encima = por_encima.sum(axis=1)
 print("Numero de horas por dia que superan los 1.2 kWh:")
 for dia, cantidad in zip(dias_semana, dias_por_encima):
     print(f"{dia}: {cantidad}")
+print()
+
+# Vector precio. Valle, llano y punta
+
+vector_consumo = np.full(24, 0.08)
+vector_consumo[8:23] = 0.15
+vector_consumo[10:14] = 0.25
+vector_consumo[18:22] = 0.25
+
+coste_semanal = vector_consumo * consumo
+
+coste_por_dia = coste_semanal.sum(axis=1)
+for dia, coste in zip(dias_semana, coste_por_dia):
+    print(f"{dia}: {coste:.2f}")
+
+coste_total = coste_por_dia.sum()
+print(f"\nCoste total: {coste_total:.2f}")
